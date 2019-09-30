@@ -9,18 +9,18 @@ logging.basicConfig(level=logging.INFO)
 _description = 'program that prints the relative frequence of each letter of the alphabet in the book.'
 
 def process(file_path):
-    "test di verifica"
+    #test di verifica
     assert file_path.endswith('.txt')       #se una string finisce con una sottostringa
     assert os.path.isfile(file_path)        #se è un file che esiste
 
-    "contest management: usciti dal blocco il file è automaticamente chiuso"
+    #contest management: usciti dal blocco il file è automaticamente chiuso
     logging.info('Opening file %s', file_path)
     with open(file_path) as input_file:
         data=input_file.read()
     logging.info('DOne %d character found.', len(data))
 
 
-    "dictionary"
+    #creo dictionary
     letters='abcdefghijklmnopqrstuvxyz'
     freq_dict={}
 
@@ -38,12 +38,12 @@ def process(file_path):
         if ch in letters:
             freq_dict[ch]+=1
     #print (freq_dict)
-    "normalizzare le occorrenze"
+    #normalizzare le occorrenze
     num_characters = float(sum(freq_dict.values()))
     for ch in letters:
         freq_dict[ch]/=num_characters
 
-    "print output"
+    #print output
     var=[]
     ff=[]
     for ch,freq in freq_dict.items():
@@ -61,4 +61,3 @@ if __name__ == '__main__':
     parser.add_argument('infile', help = "path to imput file txt")
     args = parser.parse_args()
     process(args.infile)
-    
