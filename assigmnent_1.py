@@ -1,10 +1,10 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import os
 import argparse
 import logging #impara ad usare
 import time
 import re
+import numpy as np
+import matplotlib.pyplot as plt
 logging.basicConfig(level=logging.INFO)
 
 
@@ -37,21 +37,21 @@ def process(file_path):
             pass
         '''
         if ch in letters:
-            freq_dict[ch]+=1
+            freq_dict[ch] += 1
     #print (freq_dict)
     #normalizzare le occorrenze
     num_characters = float(sum(freq_dict.values()))
     for ch in letters:
-        freq_dict[ch]/=num_characters
+        freq_dict[ch] /= num_characters
 
     #prepare list for printing [var,ff]
-    x=[]
-    y=[]
+    x = []
+    y = []
 
     #print output
-    print ('Relative frequence of each letters.')
-    for ch,freq in freq_dict.items():
-        print('{}:{:.3f}%'.format(ch,freq * 100.))
+    print('Relative frequence of each letters.')
+    for ch, freq in freq_dict.items():
+        print('{}:{:.3f}%'.format(ch, freq * 100.))
         x.append(ch)
         y.append(freq*100)
 
@@ -60,7 +60,7 @@ def process(file_path):
         logging.info('Display the histogram of the frequencies ')
         plt.title('Bar plot of frequencies')
         plt.ylabel('Frequencies')
-        plt.bar(x,y)
+        plt.bar(x, y)
         plt.show()
         logging.info('Done.')
 
@@ -68,7 +68,7 @@ def process(file_path):
     if args.counting != None:
         logging.info('Printing stats')
         n_ch = len(data)
-        n_words = len(re.findall(r'\w+',data))
+        n_words = len(re.findall(r'\w+', data))
         with open(file_path) as input_file:
             n_lines = input_file.read().count('\n')
         print ('Number of: characters: {}, words: {}, lines: {}'.format(n_ch,n_words, n_lines))
@@ -78,7 +78,7 @@ def process(file_path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = _description)
-    parser.add_argument('-i','--input', help = 'path to imput file')
+    parser.add_argument('-i', '--input', help='path to imput file')
     parser.add_argument('-hist', '--histogram', help='Do you want to to display a histogram of the frequencies? Answare: yes o no')
     parser.add_argument('-count', '--counting', help='Do you want print out the book stats? Answare: yes o no')
     args = parser.parse_args()
@@ -86,4 +86,4 @@ if __name__ == '__main__':
     process(args.input)
     end = time.time()
     elasped = end - start
-    print ('Total elasped time: {} s'.format(elasped))
+    print('Total elasped time: {} s'.format(elasped))
